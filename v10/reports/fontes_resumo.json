@@ -1,0 +1,9 @@
+{
+ "amostras_treino": {
+  "pos": 252305,
+  "neg": 57524
+ },
+ "T_sim": 0.93,
+ "S3_recall_pos_SM": 0.996,
+ "mapbiomas_disponivel": 0
+}

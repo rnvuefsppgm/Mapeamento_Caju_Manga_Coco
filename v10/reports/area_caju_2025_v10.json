@@ -1,0 +1,127 @@
+[
+ {
+  "regiao": "m2206506_MonsenhorHipolito",
+  "caju_ha": 10196.2,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2208205_PioIX",
+  "caju_ha": 25010.8,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2300705_AltoSanto",
+  "caju_ha": 4785.1,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2301109_Aracati",
+  "caju_ha": 5125.0,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2301208_Aracoiaba",
+  "caju_ha": 3333.8,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2301950_Barreira",
+  "caju_ha": 8327.6,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2302206_Beberibe",
+  "caju_ha": 23886.2,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2302305_BelaCruz",
+  "caju_ha": 33151.1,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2303501_Cascavel",
+  "caju_ha": 11117.6,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2303956_Chorozinho",
+  "caju_ha": 9965.2,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2304251_Cruz",
+  "caju_ha": 14968.0,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2304459_Fortim",
+  "caju_ha": 1120.3,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2304707_Granja",
+  "caju_ha": 6749.6,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2305357_Icapui",
+  "caju_ha": 188.7,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2306405_Itapipoca",
+  "caju_ha": 12232.0,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2306553_Itarema",
+  "caju_ha": 5897.1,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2307254_JijocadeJericoacoara",
+  "caju_ha": 6492.3,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2307809_Marco",
+  "caju_ha": 4625.6,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2309458_Ocara",
+  "caju_ha": 12354.8,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2309607_Pacajus",
+  "caju_ha": 4878.7,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2401008_Apodi",
+  "caju_ha": 8260.3,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2402709_CerroCora",
+  "caju_ha": 25.7,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2413359_SerradoMel",
+  "caju_ha": 18754.5,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2413607_SeverianoMelo",
+  "caju_ha": 1357.7,
+  "limiar": 0.55
+ },
+ {
+  "regiao": "m2602803_Buique",
+  "caju_ha": 4279.7,
+  "limiar": 0.55
+ }
+]

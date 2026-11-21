@@ -1,0 +1,20 @@
+# dados pesados e gerados (recriados pelos scripts)
+**/data/
+**/models/
+**/logs/
+**/metadata/
+**/predictions/
+**/expressions/
+**/reports/oof/
+**/reports/cluster_stats/
+*.npy
+*.npz
+*.pt
+*.vrt
+# ambientes
+.venv*/
+__pycache__/
+*.pyc
+# credenciais
+*credentials*.json
+.env

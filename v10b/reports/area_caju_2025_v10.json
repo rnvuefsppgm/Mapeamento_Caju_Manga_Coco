@@ -1,0 +1,202 @@
+[
+ {
+  "regiao": "m2206506_MonsenhorHipolito",
+  "caju_ha": 13857.9,
+  "caju_ha_sem_pos": 13973.5,
+  "caju_ha_unet": 4753.0,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2208205_PioIX",
+  "caju_ha": 44524.6,
+  "caju_ha_sem_pos": 45402.8,
+  "caju_ha_unet": 25497.0,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2300705_AltoSanto",
+  "caju_ha": 6985.0,
+  "caju_ha_sem_pos": 7206.8,
+  "caju_ha_unet": 7026.9,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2301109_Aracati",
+  "caju_ha": 8731.6,
+  "caju_ha_sem_pos": 9005.7,
+  "caju_ha_unet": 8407.6,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2301208_Aracoiaba",
+  "caju_ha": 4188.5,
+  "caju_ha_sem_pos": 4301.4,
+  "caju_ha_unet": 3445.8,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2301950_Barreira",
+  "caju_ha": 9169.0,
+  "caju_ha_sem_pos": 9174.6,
+  "caju_ha_unet": 8365.9,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2302206_Beberibe",
+  "caju_ha": 31129.3,
+  "caju_ha_sem_pos": 31608.8,
+  "caju_ha_unet": 26921.5,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2302305_BelaCruz",
+  "caju_ha": 36813.7,
+  "caju_ha_sem_pos": 36779.0,
+  "caju_ha_unet": 32882.6,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2303501_Cascavel",
+  "caju_ha": 17349.9,
+  "caju_ha_sem_pos": 17543.4,
+  "caju_ha_unet": 10011.3,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2303956_Chorozinho",
+  "caju_ha": 11264.0,
+  "caju_ha_sem_pos": 11277.8,
+  "caju_ha_unet": 10387.7,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2304251_Cruz",
+  "caju_ha": 18614.6,
+  "caju_ha_sem_pos": 18558.2,
+  "caju_ha_unet": 13953.5,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2304459_Fortim",
+  "caju_ha": 2902.0,
+  "caju_ha_sem_pos": 3000.4,
+  "caju_ha_unet": 2906.2,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2304707_Granja",
+  "caju_ha": 13065.8,
+  "caju_ha_sem_pos": 14453.7,
+  "caju_ha_unet": 6119.9,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2305357_Icapui",
+  "caju_ha": 641.2,
+  "caju_ha_sem_pos": 691.3,
+  "caju_ha_unet": 644.1,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2306405_Itapipoca",
+  "caju_ha": 21823.7,
+  "caju_ha_sem_pos": 22260.0,
+  "caju_ha_unet": 14546.1,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2306553_Itarema",
+  "caju_ha": 15805.6,
+  "caju_ha_sem_pos": 16002.5,
+  "caju_ha_unet": 10342.9,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2307254_JijocadeJericoacoara",
+  "caju_ha": 8865.6,
+  "caju_ha_sem_pos": 8811.7,
+  "caju_ha_unet": 5135.7,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2307809_Marco",
+  "caju_ha": 5795.2,
+  "caju_ha_sem_pos": 5965.9,
+  "caju_ha_unet": 4744.5,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2309458_Ocara",
+  "caju_ha": 14506.8,
+  "caju_ha_sem_pos": 14628.0,
+  "caju_ha_unet": 13064.5,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2309607_Pacajus",
+  "caju_ha": 5795.8,
+  "caju_ha_sem_pos": 5848.8,
+  "caju_ha_unet": 4765.7,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2401008_Apodi",
+  "caju_ha": 14020.0,
+  "caju_ha_sem_pos": 14439.4,
+  "caju_ha_unet": 13183.8,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2402709_CerroCora",
+  "caju_ha": 640.4,
+  "caju_ha_sem_pos": 695.7,
+  "caju_ha_unet": 569.6,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2413359_SerradoMel",
+  "caju_ha": 23343.0,
+  "caju_ha_sem_pos": 23383.0,
+  "caju_ha_unet": 23406.0,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2413607_SeverianoMelo",
+  "caju_ha": 1670.3,
+  "caju_ha_sem_pos": 1689.0,
+  "caju_ha_unet": 1582.0,
+  "a": 0.6,
+  "limiar": 0.3
+ },
+ {
+  "regiao": "m2602803_Buique",
+  "caju_ha": 600.8,
+  "caju_ha_sem_pos": 618.7,
+  "caju_ha_unet": 715.9,
+  "a": 0.6,
+  "limiar": 0.3
+ }
+]

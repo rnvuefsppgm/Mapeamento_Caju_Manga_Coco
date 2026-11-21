@@ -1,0 +1,83 @@
+{
+ "bons": [
+  "m2208205_PioIX",
+  "m2301109_Aracati",
+  "m2301208_Aracoiaba",
+  "m2301950_Barreira",
+  "m2302206_Beberibe",
+  "m2302305_BelaCruz",
+  "m2303501_Cascavel",
+  "m2303956_Chorozinho",
+  "m2304251_Cruz",
+  "m2304707_Granja",
+  "m2306405_Itapipoca",
+  "m2307254_JijocadeJericoacoara",
+  "m2307809_Marco",
+  "m2309458_Ocara",
+  "m2309607_Pacajus",
+  "m2401008_Apodi",
+  "m2413607_SeverianoMelo"
+ ],
+ "litoral_CE": {
+  "pos": 684000,
+  "neg": 1368000,
+  "bons_da_regiao": [
+   "m2303501_Cascavel",
+   "m2302206_Beberibe",
+   "m2302305_BelaCruz",
+   "m2307254_JijocadeJericoacoara",
+   "m2306405_Itapipoca",
+   "m2304707_Granja",
+   "m2307809_Marco",
+   "m2301109_Aracati",
+   "m2304251_Cruz"
+  ]
+ },
+ "sertao_CE_RN": {
+  "pos": 600000,
+  "neg": 1200000,
+  "bons_da_regiao": [
+   "m2303956_Chorozinho",
+   "m2413607_SeverianoMelo",
+   "m2301950_Barreira",
+   "m2401008_Apodi",
+   "m2309607_Pacajus",
+   "m2309458_Ocara",
+   "m2301208_Aracoiaba"
+  ]
+ },
+ "PI_PE": {
+  "pos": 348000,
+  "neg": 696000,
+  "bons_da_regiao": [
+   "m2208205_PioIX"
+  ]
+ },
+ "xr_ge50_ha": {
+  "m2303956_Chorozinho": 11261.0,
+  "m2303501_Cascavel": 18999.9,
+  "m2302206_Beberibe": 32148.5,
+  "m2305357_Icapui": 342.3,
+  "m2413607_SeverianoMelo": 1621.3,
+  "m2302305_BelaCruz": 37192.3,
+  "m2301950_Barreira": 9273.0,
+  "m2401008_Apodi": 13543.4,
+  "m2307254_JijocadeJericoacoara": 9363.6,
+  "m2413359_SerradoMel": 15895.2,
+  "m2306405_Itapipoca": 23383.0,
+  "m2304707_Granja": 18000.0,
+  "m2306553_Itarema": 16817.2,
+  "m2307809_Marco": 6120.1,
+  "m2309607_Pacajus": 5978.6,
+  "m2304459_Fortim": 2583.2,
+  "m2402709_CerroCora": 598.6,
+  "m2301109_Aracati": 7819.4,
+  "m2309458_Ocara": 14774.8,
+  "m2304251_Cruz": 19240.8,
+  "m2300705_AltoSanto": 6330.5,
+  "m2208205_PioIX": 50407.3,
+  "m2602803_Buique": 148.9,
+  "m2301208_Aracoiaba": 4523.3,
+  "m2206506_MonsenhorHipolito": 16075.1
+ }
+}
