@@ -10,5 +10,5 @@
 | Manga (98) — 25 mun. | 26.395 | 56.473 | 43.015 |
 | Coco (99) — 15 mun. | 23.053 | 54.136 | 33.325 |
 
-Disputas: 458 ha (caju×coco 258; manga×coco 200). Tempo: 02 = 7 min (GPU), 03 = 5 s.
+Legendas ArcMap/ArcGIS: `legendas/` (04_legendas.py). Disputas: 458 ha (caju×coco 258; manga×coco 200). Tempo: 02 = 7 min (GPU), 03 = 5 s.
 Para refazer: apagar `saidas/tabelas/areas_municipio_classe.csv` e rodar 02 → 03. Decisões: `docs/DECISOES_METODOLOGICAS.md`.

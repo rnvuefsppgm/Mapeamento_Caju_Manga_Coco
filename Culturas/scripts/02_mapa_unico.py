@@ -86,7 +86,7 @@ def paleta():
         ss = [re.sub("<[^>]+>", "", s) for s in re.findall(r"<si>(.*?)</si>", z.read("xl/sharedStrings.xml").decode("utf8"), re.S)]
         for row in re.findall(r"<row[^>]*>(.*?)</row>", z.read("xl/worksheets/sheet1.xml").decode("utf8"), re.S):
             vals = []
-            for attr, inner in re.findall(r"<c r=\"[A-Z]+\d+\"([^>]*?)>(.*?)</c>", row, re.S):
+            for attr, inner in re.findall(r"<c r=\"[A-Z]+\d+\"([^>]*?)(?:/>|>(.*?)</c>)", row, re.S):
                 m = re.search(r"<v>(.*?)</v>", inner)
                 if m:
                     vals.append(ss[int(m.group(1))] if 't="s"' in attr else m.group(1))

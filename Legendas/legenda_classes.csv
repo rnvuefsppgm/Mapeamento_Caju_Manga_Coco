@@ -1,0 +1,30 @@
+﻿codigo,nome,nome_en,cor_hex,R,G,B,area_ha,nova
+3,Formação Florestal,Forest Formation,#1f8d49,31,141,73,335555.79,False
+4,Formação Savânica,Savanna Formation,#7dc975,125,201,117,5531948.67,False
+5,Mangue,Mangrove,#04381d,4,56,29,11766.18,False
+9,Silvicultura,Forest Plantation,#7a5900,122,89,0,1208.23,False
+11,Campo Alagado e Área Pantanosa,Wetland,#519799,81,151,153,520.25,False
+12,Formação Campestre,Grassland Formation,#d6bc74,214,188,116,51344.47,False
+15,Pastagem,Pasture,#edde8e,237,222,142,1723241.44,False
+20,Cana,Sugar cane,#db7093,219,112,147,29442.02,False
+21,Mosaico de Usos,Mosaic of Uses,#ffefc3,255,239,195,557226.91,False
+23,"Praia, Duna e Areal","Beach, Dune and Sand Spot",#ffa07a,255,160,122,49518.53,False
+24,Área Urbanizada,Urban Area,#d4271e,212,39,30,71776.89,False
+25,Outras Áreas não Vegetadas,Other non Vegetated Areas,#db4d4f,219,77,79,52169.02,False
+29,Afloramento Rochoso,Rocky Outcrop,#ad5100,173,81,0,12712.8,False
+30,Mineração,Mining,#9c0027,156,0,39,146.73,False
+31,Aquicultura,Aquaculture,#091077,9,16,119,8867.18,False
+32,Apicum,Hypersaline Tidal Flat,#fc8114,252,129,20,2010.46,False
+33,"Rio, Lago e Oceano","River, Lake and Ocean",#2532e4,37,50,228,359474.31,False
+39,Soja,Soybean,#f5b3c8,245,179,200,711.68,False
+41,Outras Lavouras Temporárias,Other Temporary Crops,#f54ca9,245,76,169,200000.86,False
+46,Café,Coffee,#d68fe2,214,143,226,5434.64,False
+48,Outras Lavouras Perenes,Other Perennial Crops,#e6ccff,230,204,255,267245.99,False
+49,Restinga Arbórea,Wooded Sandbank Vegetation,#02d659,2,214,89,29.74,False
+50,Restinga Herbácea ou Arbustiva,Herbaceous Sandbank Vegetation,#ffaa5f,255,170,95,5300.29,False
+75,Usina Fotovoltaica,Photovoltaic Power Plant,#757272,117,114,114,13942.23,False
+77,Formação Herbáceo Arbustiva,Herbaceous and Shrub Formation,#86b074,134,176,116,423628.08,False
+91,Parque eólico (beta),Wind farm (beta),#403d3e,64,61,62,4718.82,False
+97,Caju,Cashew,#c0392b,192,57,43,248414.5,True
+98,Manga,Mango,#f39c12,243,156,18,26394.89,True
+99,Coco-da-baía,Coconut,#16a085,22,160,133,23053.34,True
