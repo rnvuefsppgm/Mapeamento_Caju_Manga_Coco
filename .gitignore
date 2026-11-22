@@ -1,0 +1,23 @@
+# dados pesados, modelos e saídas (fora do git)
+dados/
+modelos/
+logs/
+metadata/
+entrada/
+reports/oof/
+*.tif
+*.vrt
+*.npz
+*.npy
+*.parquet
+*.gpkg
+*.kmz
+*.pt
+__pycache__/
+*.pyc
+# arquivos locais do assistente
+.claude/settings.local.json
+# resultados versionados (mapa de classes e vetores; probabilidades ficam fora pelo tamanho)
+!resultados/**/*.tif
+!resultados/**/*.gpkg
+!resultados/**/*.kmz
