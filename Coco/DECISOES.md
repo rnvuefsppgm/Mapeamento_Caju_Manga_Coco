@@ -1,5 +1,8 @@
 # Registro de decisões — Mapa de coco
 
+| Data/hora | Decisão | Motivo | Quem | Detalhe |
+|---|---|---|---|---|
+| 2026-11-22 | Repos separados Mapeamento_Caju, Mapeamento_Manga e Mapeamento_coco tornados PRIVADOS (0 estrelas/watchers); repo geral Mapeamento_Caju_Manga_Coco segue público | pedido do usuário | Usuário | GitHub Settings |
 | 2026-11-22 | Repositório oficial passa a ser rnvuefsppgm/Mapeamento_Caju_Manga_Coco (pasta Coco/, histórico incluído); Mapeamento_coco mantido até conferência | pedido do usuário | Usuário | CLAUDE.md |
 | 2026-11-22 | Mapa único movido para D:/Mapeamento_Culturas (projeto próprio) | pedido do usuário | Claude | D:/Mapeamento_Culturas/STATUS.md |
 | 2026-11-22 | Mapa único caju+manga+coco: códigos 97/98/99 (livres na legenda MB col. 11); disputa por margem normalizada sobre o limiar de cada modelo — PROPOSTA, aguardando o usuário | pedido do usuário | Claude | docs/PLANO_MAPA_UNICO.md |
@@ -7,8 +10,6 @@
 | 2026-11-22 | v1 concluída: mapa 23.247 ha (PAM 54.136); SF/Paraipaba/Touros razão 0,6–1,3, litoral CE ≤0,10 → recomendar rodada v2 de amostras no litoral | Claude | docs/RELATORIO_FINAL_V1.md |
 | 2026-11-21 | Espera do coco ignorava só python/bash (Google Earth com KMZ da manga aberto travava a espera); CV 5 folds IoU OOF 0,789 (limiar 0,65) — trava APROVADA; final iniciado 23:07 | Claude | gpu_ocupada.ps1, cv_resumo.md |
 | 2026-11-21 | Coco pausado de novo (fold 0 concluído, IoU 0,577); encadeador espera a manga terminar por completo (run_pos_treino_v1.sh) e qualquer 30_treino lançado por ela | pedido do usuário | Claude | scripts/gpu_ocupada.ps1 |
-| Data/hora | Decisão | Motivo | Quem | Detalhe |
-|---|---|---|---|---|
 | 21/11/2026 ~19:40 | Execução autônoma até o mapa final (E5–E7) após a manga, com decisões pré-acordadas: trava reprovada não interrompe (mapa marcado preliminar); final 100 épocas fixas; GPU dividida no meio do caminho → segue; falha → corrige e retoma | Pedido do usuário (madrugada) | Usuário (autorizou), Claude | `docs/PLANO_NOTURNO.md`, `scripts/run_treino_mapa.sh`, `40/41/50` |
 | 21/11/2026 ~19:20 | Continuar pausado até o treino final da manga (`15_final.py`, MAPA_MANGA) terminar; retomada automática da CV quando a GPU liberar | Pedido do usuário | Usuário | — |
 | 21/11/2026 ~19:05 | Treino do coco **pausado** até a GPU liberar: outro treino (`13_cv.py --name v1_A`, desde 18:11) e `22_mapas_O2_Q1.py` dividiam a RTX 3050 4 GB (época ~50 s → ~5–10 min). CV ficou retomável por fold; a seleção de época usa ouro sobre automático (o "só ouro" tem ~1 mil px de coco por fold) | Pedido do usuário | Usuário | `scripts/30_treino.py` |
