@@ -1,0 +1,127 @@
+[
+ {
+  "regiao": "m2308104_Mauriti",
+  "manga_ha": 5.3,
+  "manga_ha_sem_mascara": 11.6
+ },
+ {
+  "regiao": "m2400208_Acu",
+  "manga_ha": 5.6,
+  "manga_ha_sem_mascara": 6.2
+ },
+ {
+  "regiao": "m2404705_Ipanguacu",
+  "manga_ha": 59.2,
+  "manga_ha_sem_mascara": 73.0
+ },
+ {
+  "regiao": "m2601607_BelemdoSaoFrancisco",
+  "manga_ha": 537.3,
+  "manga_ha_sem_mascara": 575.2
+ },
+ {
+  "regiao": "m2603009_Cabrobo",
+  "manga_ha": 27.8,
+  "manga_ha_sem_mascara": 28.6
+ },
+ {
+  "regiao": "m2608750_LagoaGrande",
+  "manga_ha": 179.4,
+  "manga_ha_sem_mascara": 196.0
+ },
+ {
+  "regiao": "m2609808_Oroco",
+  "manga_ha": 53.7,
+  "manga_ha_sem_mascara": 55.3
+ },
+ {
+  "regiao": "m2611101_Petrolina",
+  "manga_ha": 4443.7,
+  "manga_ha_sem_mascara": 4696.7
+ },
+ {
+  "regiao": "m2612604_SantaMariadaBoaVista",
+  "manga_ha": 80.3,
+  "manga_ha_sem_mascara": 86.4
+ },
+ {
+  "regiao": "m2900207_Abare",
+  "manga_ha": 27.8,
+  "manga_ha_sem_mascara": 32.8
+ },
+ {
+  "regiao": "m2902807_BarradaEstiva",
+  "manga_ha": 0.0,
+  "manga_ha_sem_mascara": 0.0
+ },
+ {
+  "regiao": "m2907103_Carinhanha",
+  "manga_ha": 600.2,
+  "manga_ha_sem_mascara": 663.8
+ },
+ {
+  "regiao": "m2907202_CasaNova",
+  "manga_ha": 4375.5,
+  "manga_ha_sem_mascara": 4466.9
+ },
+ {
+  "regiao": "m2909901_Curaca",
+  "manga_ha": 62.0,
+  "manga_ha_sem_mascara": 73.5
+ },
+ {
+  "regiao": "m2910107_DomBasilio",
+  "manga_ha": 242.0,
+  "manga_ha_sem_mascara": 253.3
+ },
+ {
+  "regiao": "m2917201_Ituacu",
+  "manga_ha": 29.6,
+  "manga_ha_sem_mascara": 32.1
+ },
+ {
+  "regiao": "m2918407_Juazeiro",
+  "manga_ha": 2462.6,
+  "manga_ha_sem_mascara": 5166.0
+ },
+ {
+  "regiao": "m2919504_LivramentodeNossaSen",
+  "manga_ha": 3446.9,
+  "manga_ha_sem_mascara": 3532.8
+ },
+ {
+  "regiao": "m2926707_RiodeContas",
+  "manga_ha": 257.3,
+  "manga_ha_sem_mascara": 283.5
+ },
+ {
+  "regiao": "m2930204_SentoSe",
+  "manga_ha": 862.1,
+  "manga_ha_sem_mascara": 870.1
+ },
+ {
+  "regiao": "m2930774_Sobradinho",
+  "manga_ha": 179.5,
+  "manga_ha_sem_mascara": 192.0
+ },
+ {
+  "regiao": "m2931004_Tanhacu",
+  "manga_ha": 42.1,
+  "manga_ha_sem_mascara": 42.4
+ },
+ {
+  "regiao": "m3135050_Jaiba",
+  "manga_ha": 2398.8,
+  "manga_ha_sem_mascara": 5670.0
+ },
+ {
+  "regiao": "m3135100_Janauba",
+  "manga_ha": 3762.4,
+  "manga_ha_sem_mascara": 3944.2
+ },
+ {
+  "regiao": "m3140852_MatiasCardoso",
+  "manga_ha": 2410.2,
+  "manga_ha_sem_mascara": 2630.4
+ }
+]

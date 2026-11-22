@@ -1,0 +1,241 @@
+# config.yaml — Mapeamento de MANGA 2025 (estratégia do caju v10b)
+# Base: D:/Modelo_Caju/v10b/config/config.yaml (cópia em config_caju_v10b_ref.yaml).
+# Seções de treino/inferência herdadas do caju; seção "manga" no fim = parâmetros novos.
+
+project:
+  name: mango_mapping
+  random_seed: 42
+  crs_working: "EPSG:32724"      # UTM adequado à AOI (ajuste à sua região!). Ex.: NE do Brasil ~ 24S.
+  # DECISÃO METODOLÓGICA: trabalhar em CRS métrico (UTM) garante pixels de 10 m
+  # reais e distâncias corretas para o spatial split. WGS84 (graus) NÃO serve.
+
+# -----------------------------------------------------------------------------
+# Raiz de SAÍDA: onde TODAS as pastas abaixo (data/, models/, reports/, etc.)
+# serão criadas. Aponte para a sua pasta de trabalho. Use barras normais "/" ou
+# barras invertidas duplas "\\" no Windows.
+#   Ex.: "C:/Users/Rodrigo/Desktop/Projeto_Mapeamento_Agricultura_Caatinga/Modelo"
+# Deixe vazio ("") para gravar dentro da própria pasta do projeto (padrão antigo).
+# -----------------------------------------------------------------------------
+output_root: "D:/Backup_2026/Geral_desktop/MAPA_MANGA"
+
+paths:
+  entrada: entrada
+  amostras: dados/amostras
+  pam: dados/pam
+  aoi: dados/aoi
+  embeddings: dados/embeddings
+  mapbiomas: dados/mapbiomas
+  rotulos: dados/rotulos
+  labels: dados/rotulos
+  chips: dados/chips
+  cache: dados/cache
+  predictions: dados/predicoes
+  models: modelos
+  logs: logs
+  reports: reports
+  metadata: metadata
+  censo: dados/censo_agro
+
+# -----------------------------------------------------------------------------
+# Microsoft Planetary Computer / STAC
+# -----------------------------------------------------------------------------
+chips:
+  size: 256                       # 256 px * 10 m = 2.56 km
+  stride: 96                      # v6: 96 (3 anos x chips; equilibra volume/sobreposição)
+  min_valid_fraction: 0.70        # descarta chip com muito NoData/nuvem
+  edge_erosion_px: 1              # erosão da label para reduzir pixels mistos de borda
+  label_positive_value: 1
+  label_background_value: 0
+  label_ignore_value: 255         # pixels a ignorar na loss (borda/no-data)
+
+# -----------------------------------------------------------------------------
+# Split espacial (prevenção de data leakage)
+# -----------------------------------------------------------------------------
+split:
+  strategy: "spatial_block"       # "spatial_block" | "leave_municipality_out"
+  block_size_km: 10               # v4: blocos menores -> mais blocos -> split val/teste mais confiável
+  fractions: {train: 0.60, val: 0.20, test: 0.20}
+  group_field: "municipality"     # usado no leave-one-municipality-out
+
+# -----------------------------------------------------------------------------
+# Dados / normalização  (parâmetros estimados SOMENTE no treino)
+# -----------------------------------------------------------------------------
+normalization:
+  method: "robust"                # "robust" (p2/p98) | "zscore" | "none"
+  clip_percentiles: [2, 98]
+  stats_file: metadata/norm_stats.json
+
+# -----------------------------------------------------------------------------
+# Modelo
+# -----------------------------------------------------------------------------
+model:
+  architecture: "unet"            # "unet" | "unetpp" | "deeplabv3plus"
+  encoder: "resnet18"             # v4: encoder menor -> menos overfitting
+  encoder_weights: "imagenet"     # atenção: pré-treino RGB; ver models.py p/ >3 canais
+  num_classes: 1                  # binário (manga vs fundo) -> saída 1 canal + sigmoid
+
+# -----------------------------------------------------------------------------
+# Treinamento
+# -----------------------------------------------------------------------------
+training:
+  epochs: 100
+  batch_size: 16                  # v6: GPU ok (1,4 GB de 4 GB medido)
+  learning_rate: 0.0001
+  weight_decay: 0.001             # v4: regularização mais forte (era 0.0001)
+  patience: 15                    # early stopping
+  num_workers: 4                  # v10b: 8 consumia RAM; cache agora em 8 bits
+  mixed_precision: true
+  scheduler: "cosine"             # "cosine" | "plateau" | "none"
+  loss: "focal_dice"              # v2: foca a classe rara (caju); antes "bce_dice"
+  monitor_metric: "iou_cashew"    # métrica p/ checkpoint/early-stop
+  augment: true
+
+# -----------------------------------------------------------------------------
+# Experimentos (modalidade de entrada)
+# -----------------------------------------------------------------------------
+inference:
+  chip_size: 256
+  overlap: 64
+  blending: "gaussian"            # "average" | "gaussian"
+  batch_size: 8
+  threshold: null                 # null -> determinar no conjunto de validação
+  threshold_criterion: "min_precision"   # v3: prioriza precisão (menos falso positivo)
+  min_precision: 0.80
+
+# -----------------------------------------------------------------------------
+# Pós-processamento
+# -----------------------------------------------------------------------------
+postprocessing:
+  min_mapping_unit_ha: 0.5        # ~50 pixels a 10 m
+  apply_majority_filter: true
+  majority_kernel: 3
+
+# ---------------- v6 ----------------
+embeddings:                       # v7: Google Satellite Embedding (AlphaEarth)
+  enabled: false                  # v9: chips já são só embeddings (64 canais)
+  collection: "GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL"
+  year: 2025
+  project: "rnv-geodatin"                  # ID do projeto Google Cloud registrado no Earth Engine
+  dir: data/embeddings
+  n_bands: 64
+  scale: 127                      # int8 = round(valor * 127); -128 = NoData
+  tile_px: 512                    # 512x512x64 int8 = 16 MB por requisição (< 48 MB)
+  workers: 6                      # requisições paralelas (sem tarefas no Earth Engine)
+v9:
+  ignore_buffer_m: 25             # faixa ignorada em volta dos polígonos de campo
+  pam_ratio: [0.5, 2.5]           # aceita município p/ pseudo se mapa/PAM(2025) nesta faixa
+  pos_thr: 0.90                   # caju se prob v8 >= 0,90
+  neg_thr: 0.05                   # não-caju se prob v8 <= 0,05 (variante B)
+  min_px: 100                     # mancha mínima de caju = 1 ha
+  max_pseudo_chips: 500           # ~36% do total (891 campo + 500)
+  min_confident_fraction: 0.5
+
+# ---------------------------------------------------------------- MANGA ----
+manga:
+  ano: 2025
+  crs: "EPSG:32724"
+  fontes:
+    municipios_shp: "D:/arc_arquivos/BR_Municipios_2024/BR_Municipios_2024.shp"
+    bioma_csv: "D:/Modelo_Caju/dados_externos/Bioma_Predominante_por_Municipio_2024.csv"
+    mapbiomas_tif: "D:/Eduarda/raster_new/brazil_coverage-col11_2025.tif"
+    venv_datensee: "D:/Modelo_Caju/.venv_v8"
+  pam:
+    tabela: 1613
+    classificacao: 82
+    categoria_manga: 2737
+    anos: [2023, 2024, 2025]
+    variaveis: [216, 214, 2313]     # área colhida, quantidade, área destinada à colheita
+  selecao:                          # mesma regra do caju: N maiores produtores (média 2023-2025)
+    bioma: "Caatinga"               # null = Brasil inteiro
+    n_municipios: 25
+    criterio: "prod_med_t"
+    incluir_sempre: [2919504]       # Livramento de Nossa Senhora (BA): amostras de campo
+  regioes:
+    buffer_municipio_m: 1000
+  amostras:
+    ignore_buffer_m: 25             # faixa ignorada em volta dos polígonos (caju v9)
+    neg_distancia_m: 100            # negativo confiável só a > 100 m (caju v10 S2)
+  embeddings:
+    colecao: "GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL"
+    projeto_ee: "rnv-geodatin"
+    tile_px: 512
+    n_bandas: 64                    # uint8 = round(x*127)+128 ; 0 = NoData
+  rotulos:                          # 07/08: códigos do raster de campo (decisão de negativos fica p/ o treino)
+    classes_mb_compativeis: [15, 46, 48, 41, 21]   # 98,0% dos polígonos (ver reports/mb_classes_manga.csv)
+    area_amostrada_buffer_m: 500    # envoltória convexa das amostras + 500 m = área "mapeada por completo"?
+    # códigos: 1 manga | 2 faixa ignorada | 3 negativo na área amostrada | 4 negativo MapBiomas (fora de C)
+    #          5 desconhecido (classe C fora da área amostrada) | 255 sem dado
+  chips_campo:
+    stride: 64                      # v1 (treino Chapada): era 96
+    min_rotulado: 0.30              # fração mínima de pixels com código 1, 3 ou 4
+    bloco_cv_km: 3                  # amostras ocupam 5,9 x 11,3 km: blocos de 10 km dariam só 2-4 blocos
+  censo_agro:                       # Censo Agropecuário 2017, SIDRA 6955 (classificação 227)
+    tabela: 6955
+    produto: 4968                   # Manga
+    variaveis: {estab_50mais: 9504, area_existente_ha: 10079, area_colhida_ha: 10078,
+                pes_50mais_mil: 10080, pes_menos50_mil: 10082}
+
+# ------------------------------------------------- AMOSTRAGEM (método do coco) ----
+amostragem:
+  amostras_usuario:
+    kml_dir: "D:/Backup_2026/Geral_desktop/MAPA_MANGA/dados/amostras_usuario"   # KMZ da pasta MANGA do Google Earth Pro
+    myplaces: "C:/Users/Rodrigo/AppData/LocalLow/Google/GoogleEarth/myplaces.kml"
+    pasta_ge: "MANGA"
+    poligonos_extra: "dados/amostras/manga_poligonos.gpkg"   # 258 polígonos únicos de Livramento
+  externos: {mapbiomas_2025: "D:/Eduarda/raster_new/brazil_coverage-col11_2025.tif"}
+  rotulos:
+    classes_seguras_nao_coco_mb: [3, 4, 5, 23, 24, 25, 30, 31, 33]   # nome herdado do coco; = não-manga
+    mancha_min_ha: 1.0
+    fotointerp: {por_municipio: 60}
+  modelo_px_por_poligono: 20        # limita o conjunto-modelo (~5 mil px) p/ caber na GPU dividida com o caju
+  gpu_fracao_max: 0.35
+  contraste:                        # protótipos negativos: candidato só se sim_manga - sim_neg >= margem
+    margem: 0.02
+    caju: {px_por_poligono: 5, vetor: "D:/Modelo_Caju/v7/data/vectors/Pol_Caju.shp", emb_glob: "D:/Modelo_Caju/v8/data/ee_exports/2025/embeddings/treino_*/*.tif"}
+    coco: {px_por_poligono: 400, vetor: "D:/Modelo_Coco/dados_externos/amostras_usuario/COCO.kmz", emb_glob: "D:/Modelo_Coco/v1/data/embeddings/2025/*/*.tif",
+           regioes_dir: "D:/Modelo_Coco/v1/data/aoi/regions"}
+  listas_municipios:
+    top15_caatinga: [2918407, 2611101, 2907202, 2601607, 2919504, 2612604, 2608750, 2909901, 2930204, 3135050,
+                     2404705, 2917201, 3140852, 2910107, 2931004]   # reports/A1_ranking_manga.md
+  auto_classificacao:               # A4a — candidatos -> MANGA_ok / NAO_MANGA / DUVIDA por probabilidade (rótulo AUTOMÁTICO)
+    p_ok: 0.80                      # região conhecida (Chapada, mesma paisagem das amostras)
+    p_ok_regiao_nova: 0.90          # Vale do S. Francisco, Norte de MG, RN
+    margem_caju_coco: 0.50          # região nova: p_manga - max(p_caju, p_coco) >= margem
+    p_nao: 0.20
+    p_nao_controle: 0.50            # controle negativo com p < 0,5 -> NAO_MANGA
+    teto_pam: 0.6                   # área MANGA_ok <= 0,6 x área colhida PAM 2025 (regra do caju v10a)
+    regiao_conhecida: [2919504, 2910107, 2917201, 2931004, 2926707, 2902807]   # Livramento, Dom Basílio, Ituaçu, Tanhaçu, Rio de Contas, Barra da Estiva
+    classes_compativeis: [15, 46, 48, 41, 21]
+    checagem_por_pasta: 10
+    regra_ok: "pixel"               # opção A (usuário 21/11): p por pixel; MANGA_ok = recorte confiável
+    ok_pixel: {area_min_ha: 1.0, frac_min: 0.5, componente_min_px: 25}
+    treino:
+      pos_max_px: 60000             # pixels de manga (Livramento, código 1)
+      neg_denso_px: 30000           # Livramento, código 3 (área amostrada, > 100 m dos pomares)
+      neg_mb_px_por_regiao: 3000    # classes seguras MapBiomas em cada um dos 15 municípios
+      caju_px_por_poligono: 50
+      coco_px_por_poligono: 1000
+      folds: 5
+      xgb: {n_estimators: 400, max_depth: 6, learning_rate: 0.08, subsample: 0.8, colsample_bytree: 0.8}
+  mapa_xgb:                         # A5 — mapa automático por pixel com o classificador da A4a (rótulo AUTOMÁTICO)
+    bloco_px: 1024
+    p_conhecida: 0.80               # mesmas regras de pixel confiável da A4a (opção A)
+    p_nova: 0.90
+    margem_caju_coco: 0.50
+    mancha_min_ha: 1.0              # pós-processamento do caju (1 ha)
+    abertura_px: 1
+
+# ------------------------------------------------- TREINO v1 (Chapada) ----
+experiment: {name: "manga_v1", channels: "both", modality: "emb"}
+treino_v1:
+  municipios: [2919504, 2910107, 2917201, 2931004]   # Livramento, Dom Basílio, Ituaçu, Tanhaçu
+  p_neg_xgb: 5                     # prob A5 (0-100) <= 5 em classe compatível -> não-manga
+  anel_px: 2
+  pseudo_por_classe: 30            # chips 256 px sem sobreposição: até 30 com manga + 30 sem por município
+  pseudo_min_rotulado: 0.30
+  caju_chips: 60                   # proteção 2: chips de caju (Serra do Mel) como NÃO-manga
+  caju_chips_dir: "D:/Modelo_Caju/v10b/data/chips"
+  init_caju: "D:/Modelo_Caju/v10b/models/final_seed42.pt"   # proteção 1: cabeça reiniciada
+  cv: {folds: 5, epochs: 60, patience: 15}
+  trava_iou: 0.60
+  final: {epocas: 100, sementes: [42, 7, 123, 2024, 99]}
