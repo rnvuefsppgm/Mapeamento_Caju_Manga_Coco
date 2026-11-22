@@ -82,3 +82,18 @@ dbf(vat, recs, campos)
 shutil.copy(vat, p("saidas", "mapa", f"{base}.tif.vat.dbf"))
 print(f"{len(d)} classes ({int(d.nova.sum())} novas) -> {out}")
 print(d[["codigo", "nome", "cor_hex", "area_ha"]].to_string(index=False))
+
+# --- README da pasta legendas: tabela de todas as classes com amostra de cor (PNG local em cores/)
+from PIL import Image
+
+(out / "cores").mkdir(exist_ok=True)
+for r in d.itertuples():
+    Image.new("RGB", (16, 16), (r.R, r.G, r.B)).save(out / "cores" / f"{r.codigo}.png")
+rd = out / "README.md"
+txt = rd.read_text(encoding="utf-8").split("\n## Todas as classes")[0].rstrip()
+lin = ["", "", "## Todas as classes", "", "| Cor | Código | Classe | Class (en) | Hex | R, G, B | Área no mapa (ha) |", "|---|---|---|---|---|---|---|"]
+lin += [f"| ![{r.cor_hex}](cores/{r.codigo}.png) | **{r.codigo}** | {'**' + r.nome + '**' if r.nova else r.nome} | {r.nome_en} | "
+        f"`{r.cor_hex}` | {r.R}, {r.G}, {r.B} | {f'{r.area_ha:,.0f}'.replace(',', '.')} |"
+        for r in d.itertuples()]
+rd.write_text(txt + "\n".join(lin) + "\n\nEm negrito: classes novas (não constam da legenda MapBiomas Coleção 11).\n", encoding="utf-8")
+print(f"README com {len(d)} classes -> {rd}")
