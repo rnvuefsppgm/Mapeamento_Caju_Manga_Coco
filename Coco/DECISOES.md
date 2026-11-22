@@ -1,5 +1,8 @@
 # Registro de decisões — Mapa de coco
 
+| 2026-11-22 | Mapa único movido para D:/Mapeamento_Culturas (projeto próprio) | pedido do usuário | Claude | D:/Mapeamento_Culturas/STATUS.md |
+| 2026-11-22 | Mapa único caju+manga+coco: códigos 97/98/99 (livres na legenda MB col. 11); disputa por margem normalizada sobre o limiar de cada modelo — PROPOSTA, aguardando o usuário | pedido do usuário | Claude | docs/PLANO_MAPA_UNICO.md |
+| 2026-11-22 | Projeto publicado em github.com/rnvuefsppgm/Mapeamento_coco (scripts, resultados/v1, TUTORIAL.md); 42_vetores_kmz.py criado (KMZ/GPKG) | pedido do usuário | Claude | README.md |
 | 2026-11-22 | v1 concluída: mapa 23.247 ha (PAM 54.136); SF/Paraipaba/Touros razão 0,6–1,3, litoral CE ≤0,10 → recomendar rodada v2 de amostras no litoral | Claude | docs/RELATORIO_FINAL_V1.md |
 | 2026-11-21 | Espera do coco ignorava só python/bash (Google Earth com KMZ da manga aberto travava a espera); CV 5 folds IoU OOF 0,789 (limiar 0,65) — trava APROVADA; final iniciado 23:07 | Claude | gpu_ocupada.ps1, cv_resumo.md |
 | 2026-11-21 | Coco pausado de novo (fold 0 concluído, IoU 0,577); encadeador espera a manga terminar por completo (run_pos_treino_v1.sh) e qualquer 30_treino lançado por ela | pedido do usuário | Claude | scripts/gpu_ocupada.ps1 |

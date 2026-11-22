@@ -1,0 +1,43 @@
+# Mapeamento Culturas — mapa único caju + manga + coco 2025 sobre MapBiomas Coleção 11 (todos os scripts leem daqui)
+raiz: "D:/Mapeamento_Culturas"
+crs: "EPSG:32724"
+res: 10
+bloco: 4096                       # px por bloco no processamento (GPU)
+municipios_shp: "D:/arc_arquivos/BR_Municipios_2024/BR_Municipios_2024.shp"
+mapbiomas: "D:/Eduarda/raster_new/brazil_coverage-col11_2025.tif"   # EPSG:4326, 30 m
+legenda_mapbiomas: "D:/Modelo_Caju/Legenda Coleção 11 - Descrição Detalhada.xlsx"
+
+# códigos novos: não constam da legenda MapBiomas col. 11 (conferido nas 5 abas da planilha)
+culturas:
+  caju:
+    codigo: 97
+    cor: "#c0392b"
+    classe: "D:/Modelo_Caju/v10b/predictions/caju_2025_25mun_FINAL_classe.tif"
+    prob: "D:/Modelo_Caju/v10b/predictions/caju_2025_25mun_FINAL_prob.tif"
+    municipios_dir: "D:/Modelo_Caju/v10b/predictions/2025"      # m<cod>_<nome>_prob.tif → lista de municípios
+    limiar: 0.40
+    limiar_por_municipio: {0.30: [2300705, 2301208, 2301950, 2303956, 2309458, 2309607, 2401008, 2402709, 2413359, 2413607]}  # fusão U-Net+XGB (sertão CE/RN)
+    pam_produto: 2725             # SIDRA 1613 c82: Castanha de caju
+    censo_produto: 4936           # SIDRA 6955 c227: Caju (castanha)
+  manga:
+    codigo: 98
+    cor: "#f39c12"
+    classe: "D:/Backup_2026/Geral_desktop/MAPA_MANGA/dados/predicoes/manga_2025_25mun_classe.tif"
+    prob: "D:/Backup_2026/Geral_desktop/MAPA_MANGA/dados/predicoes/manga_2025_25mun_prob.tif"
+    municipios_dir: "D:/Backup_2026/Geral_desktop/MAPA_MANGA/dados/predicoes/v1"
+    limiar: 0.55
+    pam_produto: 2737
+    censo_produto: 4968
+  coco:
+    codigo: 99
+    cor: "#16a085"
+    classe: "D:/Modelo_Coco/v1/predictions/coco_2025_top15_caatinga_classe.tif"
+    prob: "D:/Modelo_Coco/v1/predictions/coco_2025_top15_caatinga_prob.tif"
+    municipios_lista: "D:/Modelo_Coco/v1/data/aoi/regions_top15_caatinga.txt"
+    limiar: 0.65
+    pam_produto: 2727
+    censo_produto: 4945
+
+desempate: margem_normalizada     # pixel com 2+ culturas: vence max((p - limiar)/(1 - limiar))
+pam: {tabela: 1613, variaveis: {area_destinada: 2313, area_colhida: 216}, anos: [2023, 2024, 2025]}
+censo: {tabela: 6955, variaveis: {area_existente_ha: 10079, area_colhida_ha: 10078}}
