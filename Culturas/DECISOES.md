@@ -4,6 +4,7 @@ Resumo de uma linha; detalhe (motivo, alternativa, efeito) em `docs/DECISOES_MET
 
 | Data | Decisão | Motivo | Quem | Detalhe |
 |---|---|---|---|---|
+| 22/11/2026 | Publicado em github.com/rnvuefsppgm/Mapeamento_Caju_Manga_Coco (pastas Caju, Manga, Coco com histórico via git subtree + Culturas); cópia local D:/Mapeamento_Caju_Manga_Coco | pedido do usuário | Usuário | README.md do repositório |
 | 22/11/2026 | v1 concluída: caju 248.415 ha, manga 26.395, coco 23.053; disputas 458 ha | — | Claude | STATUS.md |
 | 22/11/2026 | Decisões detalhadas em docs/DECISOES_METODOLOGICAS.md (10 decisões) | pedido do usuário | Usuário | docs/DECISOES_METODOLOGICAS.md |
 | 22/11/2026 | Caju: PAM/Censo de castanha (1613/2725, 6955/4936) | mesma base usada no projeto caju | Claude | config.yaml |
