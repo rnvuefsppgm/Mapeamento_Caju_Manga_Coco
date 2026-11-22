@@ -2,6 +2,11 @@
 
 Réplica da estratégia do caju v10b (`D:\Modelo_Caju\v10b`) para manga. Plano em `docs/PLANO_ETAPAS.md`, decisões em `DECISOES.md`.
 
+## Git (desde 22/11/2026)
+- Repositório oficial: https://github.com/rnvuefsppgm/Mapeamento_Caju_Manga_Coco, pasta `Manga/` (cópia local `D:/Mapeamento_Caju_Manga_Coco`). Novas versões vão para lá.
+- Publicar: copiar os arquivos alterados do MAPA_MANGA para `D:/Mapeamento_Caju_Manga_Coco/Manga/`, commit e push no repo geral. Não dar push do MAPA_MANGA (o `origin` aponta para o geral só para fetch; push bloqueado porque a estrutura é diferente).
+- `rnvuefsppgm/Mapeamento_Manga` (remote `manga_antigo`) fica intacto: não apagar nem arquivar sem pedido do usuário.
+
 ## Economia de tokens (obrigatório em toda atividade deste projeto)
 1. **Começar por `STATUS.md`** (≤ 40 linhas: etapa atual, próximo passo, arquivos) e `python 00_status.py` (uma linha por etapa). Não reexplorar o projeto se eles responderem.
 2. **Nunca listar pastas de dados grandes** (`dados/chips`, `dados/embeddings`, `dados/mapbiomas`, `modelos`). Use contagem: `ls pasta | wc -l` ou o `00_status.py`.
