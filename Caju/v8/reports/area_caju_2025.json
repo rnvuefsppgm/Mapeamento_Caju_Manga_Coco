@@ -1,0 +1,127 @@
+[
+ {
+  "regiao": "m2206506_MonsenhorHipolito",
+  "caju_ha": 11654.0,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2208205_PioIX",
+  "caju_ha": 50089.9,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2300705_AltoSanto",
+  "caju_ha": 3342.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2301109_Aracati",
+  "caju_ha": 2894.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2301208_Aracoiaba",
+  "caju_ha": 2284.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2301950_Barreira",
+  "caju_ha": 5066.0,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2302206_Beberibe",
+  "caju_ha": 18125.4,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2302305_BelaCruz",
+  "caju_ha": 15538.0,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2303501_Cascavel",
+  "caju_ha": 5044.8,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2303956_Chorozinho",
+  "caju_ha": 6869.8,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2304251_Cruz",
+  "caju_ha": 4787.5,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2304459_Fortim",
+  "caju_ha": 497.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2304707_Granja",
+  "caju_ha": 1452.3,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2305357_Icapui",
+  "caju_ha": 78.6,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2306405_Itapipoca",
+  "caju_ha": 6085.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2306553_Itarema",
+  "caju_ha": 2210.7,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2307254_JijocadeJericoacoara",
+  "caju_ha": 1730.6,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2307809_Marco",
+  "caju_ha": 1724.4,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2309458_Ocara",
+  "caju_ha": 7702.6,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2309607_Pacajus",
+  "caju_ha": 1241.7,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2401008_Apodi",
+  "caju_ha": 6646.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2402709_CerroCora",
+  "caju_ha": 126.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2413359_SerradoMel",
+  "caju_ha": 19633.2,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2413607_SeverianoMelo",
+  "caju_ha": 1049.0,
+  "limiar": 0.4
+ },
+ {
+  "regiao": "m2602803_Buique",
+  "caju_ha": 5001.8,
+  "limiar": 0.4
+ }
+]

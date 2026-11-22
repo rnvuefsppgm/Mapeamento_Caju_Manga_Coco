@@ -1,0 +1,26 @@
+regiao,reg,metodo,caju_ha,cod,nome,area_ha_2025,razao_PAM
+m2303956_Chorozinho,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",11264.0,2303956,Chorozinho - CE,13886.0,0.81
+m2303501_Cascavel,litoral_CE,"só U-Net ≥ 0,40",9157.6,2303501,Cascavel - CE,9539.0,0.96
+m2302206_Beberibe,litoral_CE,"só U-Net ≥ 0,40",25690.1,2302206,Beberibe - CE,28428.0,0.9
+m2305357_Icapui,litoral_CE,"só U-Net ≥ 0,40",579.4,2305357,Icapuí - CE,7461.0,0.08
+m2413607_SeverianoMelo,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",1670.3,2413607,Severiano Melo - RN,1200.0,1.39
+m2302305_BelaCruz,litoral_CE,"só U-Net ≥ 0,40",32078.8,2302305,Bela Cruz - CE,32922.0,0.97
+m2301950_Barreira,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",9169.0,2301950,Barreira - CE,11000.0,0.83
+m2401008_Apodi,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",14020.0,2401008,Apodi - RN,15000.0,0.93
+m2307254_JijocadeJericoacoara,litoral_CE,"só U-Net ≥ 0,40",4844.4,2307254,Jijoca de Jericoacoara - CE,4205.0,1.15
+m2413359_SerradoMel,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",23343.0,2413359,Serra do Mel - RN,38000.0,0.61
+m2306405_Itapipoca,litoral_CE,"só U-Net ≥ 0,40",13429.0,2306405,Itapipoca - CE,16135.0,0.83
+m2304707_Granja,litoral_CE,"só U-Net ≥ 0,40",5359.3,2304707,Granja - CE,4836.0,1.11
+m2306553_Itarema,litoral_CE,"só U-Net ≥ 0,40",9370.1,2306553,Itarema - CE,12622.0,0.74
+m2307809_Marco,litoral_CE,"só U-Net ≥ 0,40",4479.6,2307809,Marco - CE,7868.0,0.57
+m2309607_Pacajus,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",5795.8,2309607,Pacajus - CE,5565.0,1.04
+m2304459_Fortim,litoral_CE,"só U-Net ≥ 0,40",2741.5,2304459,Fortim - CE,6261.0,0.44
+m2402709_CerroCora,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",640.4,2402709,Cerro Corá - RN,3000.0,0.21
+m2301109_Aracati,litoral_CE,"só U-Net ≥ 0,40",7779.1,2301109,Aracati - CE,9429.0,0.83
+m2309458_Ocara,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",14506.8,2309458,Ocara - CE,14686.0,0.99
+m2304251_Cruz,litoral_CE,"só U-Net ≥ 0,40",13444.2,2304251,Cruz - CE,12539.0,1.07
+m2300705_AltoSanto,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",6985.0,2300705,Alto Santo - CE,10085.0,0.69
+m2208205_PioIX,PI_PE,"só U-Net ≥ 0,40",23001.8,2208205,Pio IX - PI,24750.0,0.93
+m2602803_Buique,PI_PE,"só U-Net ≥ 0,40",618.5,2602803,Buíque - PE,1385.0,0.45
+m2301208_Aracoiaba,sertao_CE_RN,"fusão 0,6/0,4 ≥ 0,30",4188.5,2301208,Aracoiaba - CE,4593.0,0.91
+m2206506_MonsenhorHipolito,PI_PE,"só U-Net ≥ 0,40",4356.9,2206506,Monsenhor Hipólito - PI,2800.0,1.56

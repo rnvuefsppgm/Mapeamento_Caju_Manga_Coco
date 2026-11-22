@@ -1,0 +1,232 @@
+# =============================================================================
+# config.yaml  —  Pipeline de mapeamento de caju (fusão óptico-SAR)
+# -----------------------------------------------------------------------------
+# TODOS os scripts leem deste arquivo. Não coloque caminhos absolutos no código;
+# ajuste apenas aqui. Caminhos são relativos à raiz do projeto salvo indicação.
+# =============================================================================
+
+project:
+  name: cashew_mapping
+  random_seed: 42
+  crs_working: "EPSG:32724"      # UTM adequado à AOI (ajuste à sua região!). Ex.: NE do Brasil ~ 24S.
+  # DECISÃO METODOLÓGICA: trabalhar em CRS métrico (UTM) garante pixels de 10 m
+  # reais e distâncias corretas para o spatial split. WGS84 (graus) NÃO serve.
+
+# -----------------------------------------------------------------------------
+# Raiz de SAÍDA: onde TODAS as pastas abaixo (data/, models/, reports/, etc.)
+# serão criadas. Aponte para a sua pasta de trabalho. Use barras normais "/" ou
+# barras invertidas duplas "\\" no Windows.
+#   Ex.: "C:/Users/Rodrigo/Desktop/Projeto_Mapeamento_Agricultura_Caatinga/Modelo"
+# Deixe vazio ("") para gravar dentro da própria pasta do projeto (padrão antigo).
+# -----------------------------------------------------------------------------
+output_root: "D:/Modelo_Caju/v7"
+
+paths:
+  # Caminhos relativos abaixo são criados sob "output_root".
+  # Uma chave pode receber um caminho ABSOLUTO para apontar fora dessa raiz
+  # (útil, p.ex., se seus shapefiles de entrada ficam em outro lugar):
+  #   vectors: "D:/dados_entrada/vetores"
+  vectors: "D:/Modelo_Caju/v7/data/vectors"   # geometria de download (v4) fica aqui
+  raw_s1: data/raw/sentinel1
+  raw_s2: data/raw/sentinel2
+  processed: data/processed
+  chips: data/chips
+  labels: data/labels
+  predictions: data/predictions
+  models: models
+  logs: logs
+  reports: reports
+  metadata: metadata
+
+# -----------------------------------------------------------------------------
+# Microsoft Planetary Computer / STAC
+# -----------------------------------------------------------------------------
+stac:
+  endpoint: "https://planetarycomputer.microsoft.com/api/stac/v1"
+  # A assinatura SAS é anônima por padrão (não exige mais API key). Se você tiver
+  # uma subscription key, exporte a variável de ambiente PC_SDK_SUBSCRIPTION_KEY.
+  sign_assets: true
+  max_retries: 5
+  backoff_base_seconds: 2.0
+  request_timeout_seconds: 60
+
+# -----------------------------------------------------------------------------
+# Sentinel-2  (coleção: sentinel-2-l2a  —  reflectância de superfície / BOA)
+# -----------------------------------------------------------------------------
+sentinel2:
+  collection: "sentinel-2-l2a"
+  # Bandas escolhidas por relevância biofísica (NÃO todas, para não inflar dim.):
+  bands: ["B02", "B03", "B04", "B05", "B06", "B07", "B08", "B8A", "B11", "B12"]
+  scl_asset: "SCL"                # Scene Classification Layer (20 m)
+  scale: 0.0001                   # reflectância = DN * scale
+  boa_offset_baseline_04: -1000   # harmonização de baseline >= 04.00 (após ~2022-01-25)
+  # SCL classes a MASCARAR (inválidas): 0 NoData, 1 Saturated, 3 CloudShadow,
+  # 8 CloudMedium, 9 CloudHigh, 10 ThinCirrus, 11 Snow. Mantidas: 4 Veg, 5 Bare,
+  # 6 Water, 7 Unclassified, 2 DarkArea (opcional).
+  scl_invalid_classes: [0, 1, 3, 8, 9, 10, 11]
+  max_scene_cloud_cover: 60       # pré-filtro grosseiro (eo:cloud_cover); QC fino é por-AOI
+  min_valid_fraction_aoi: 0.60    # fração mínima de pixels válidos DENTRO da AOI
+
+# -----------------------------------------------------------------------------
+# Sentinel-1  (coleção: sentinel-1-rtc  —  gamma0 RTC, escala LINEAR de potência)
+# -----------------------------------------------------------------------------
+sentinel1:
+  collection: "sentinel-1-rtc"    # já: calibrado, thermal-noise/border-noise removidos, terrain-corrected
+  polarizations: ["vv", "vh"]     # assets em minúsculo no RTC
+  to_db: true                     # converter potência linear -> dB para VV/VH (mais gaussiano)
+  orbit_direction: "any"          # "ascending" | "descending" | "any" (ver ETAPA 11)
+  # DECISÃO: para a prova de conceito usamos uma única geometria dominante
+  # (a mais frequente na AOI) para reduzir complexidade e efeitos de anisotropia.
+  prefer_single_orbit: true
+
+# -----------------------------------------------------------------------------
+# Composição temporal (Fase 1: descritores robustos, NÃO série temporal)
+# -----------------------------------------------------------------------------
+temporal:
+  start_date: "2025-05-01"
+  end_date: "2025-10-31"
+  years: [2025]                   # v7: piloto RN 2025
+  season_start: "05-01"
+  season_end: "10-31"          # janela sazonal única para a PoC
+  s2_reducers: ["median", "p25", "p75"]   # por banda/índice
+  s1_reducers: ["median", "p25", "p75"]   # por polarização/feature
+  min_observations: 3             # nº mínimo de cenas válidas por pixel
+
+# -----------------------------------------------------------------------------
+# Índices espectrais (calculados sobre o composto S2)
+# -----------------------------------------------------------------------------
+# v4: conjunto enxuto e decorrelacionado (remove redundantes: RVI/SAVI/NDRE2/CIre/GNDVI/MSI)
+spectral_indices: ["NDVI", "NDRE", "NDMI", "EVI", "NBR", "NDWI"]
+
+# -----------------------------------------------------------------------------
+# SAR features derivadas
+# -----------------------------------------------------------------------------
+sar_features: ["ratio_vh_vv", "diff_vv_vh"]   # em dB: razão vira diferença; ver sar_features.py
+
+# Textura SAR (v3) — calculada sobre a mediana temporal de VV/VH
+sar_texture:
+  enabled: true
+  window: 5                  # janela local em pixels (5 = 50 m no grid de 10 m)
+  glcm_levels: 32            # níveis de quantização para as features GLCM
+  local_stats: ["std", "range"]                        # estatísticas locais
+  glcm: ["contrast", "homogeneity", "dissimilarity"]   # GLCM/Haralick (eficiente)
+
+# -----------------------------------------------------------------------------
+# Harmonização espacial
+# -----------------------------------------------------------------------------
+harmonization:
+  resolution: 10                  # metros (grid final)
+  resampling_s2_20m: "bilinear"   # 20 m -> 10 m (não cria informação; ver ETAPA 5)
+  resampling_s1: "bilinear"       # S1 RTC ~10 m -> grid comum
+  # O grid de referência é definido pelo S2 10 m; tudo é reprojetado/alinhado a ele.
+
+# -----------------------------------------------------------------------------
+# Chips
+# -----------------------------------------------------------------------------
+chips:
+  size: 256                       # 256 px * 10 m = 2.56 km
+  stride: 96                      # v6: 96 (3 anos x chips; equilibra volume/sobreposição)
+  min_valid_fraction: 0.70        # descarta chip com muito NoData/nuvem
+  edge_erosion_px: 1              # erosão da label para reduzir pixels mistos de borda
+  label_positive_value: 1
+  label_background_value: 0
+  label_ignore_value: 255         # pixels a ignorar na loss (borda/no-data)
+
+# -----------------------------------------------------------------------------
+# Split espacial (prevenção de data leakage)
+# -----------------------------------------------------------------------------
+split:
+  strategy: "spatial_block"       # "spatial_block" | "leave_municipality_out"
+  block_size_km: 10               # v4: blocos menores -> mais blocos -> split val/teste mais confiável
+  fractions: {train: 0.60, val: 0.20, test: 0.20}
+  group_field: "municipality"     # usado no leave-one-municipality-out
+
+# -----------------------------------------------------------------------------
+# Dados / normalização  (parâmetros estimados SOMENTE no treino)
+# -----------------------------------------------------------------------------
+normalization:
+  method: "robust"                # "robust" (p2/p98) | "zscore" | "none"
+  clip_percentiles: [2, 98]
+  stats_file: metadata/norm_stats.json
+
+# -----------------------------------------------------------------------------
+# Modelo
+# -----------------------------------------------------------------------------
+model:
+  architecture: "unet"            # "unet" | "unetpp" | "deeplabv3plus"
+  encoder: "resnet18"             # v4: encoder menor -> menos overfitting
+  encoder_weights: "imagenet"     # atenção: pré-treino RGB; ver models.py p/ >3 canais
+  num_classes: 1                  # binário (caju vs fundo) -> saída 1 canal + sigmoid
+
+# -----------------------------------------------------------------------------
+# Treinamento
+# -----------------------------------------------------------------------------
+training:
+  epochs: 100
+  batch_size: 16                  # v6: GPU ok (1,4 GB de 4 GB medido)
+  learning_rate: 0.0001
+  weight_decay: 0.001             # v4: regularização mais forte (era 0.0001)
+  patience: 15                    # early stopping
+  num_workers: 4                  # v7: com cache memmap (02c), 4 bastam
+  mixed_precision: true
+  scheduler: "cosine"             # "cosine" | "plateau" | "none"
+  loss: "focal_dice"              # v2: foca a classe rara (caju); antes "bce_dice"
+  monitor_metric: "iou_cashew"    # métrica p/ checkpoint/early-stop
+  augment: true
+
+# -----------------------------------------------------------------------------
+# Experimentos (modalidade de entrada)
+# -----------------------------------------------------------------------------
+experiment:
+  name: "E3_fusion"
+  channels: "both"                # v7: "sentinel" | "emb" | "both"               # rótulo livre p/ logs
+  modality: "fusion"              # "s2" | "s1" | "fusion"
+  use_indices: true
+  use_sar_features: true
+  use_red_edge: true
+
+# -----------------------------------------------------------------------------
+# Inferência
+# -----------------------------------------------------------------------------
+inference:
+  chip_size: 256
+  overlap: 64
+  blending: "gaussian"            # "average" | "gaussian"
+  batch_size: 8
+  threshold: null                 # null -> determinar no conjunto de validação
+  threshold_criterion: "min_precision"   # v3: prioriza precisão (menos falso positivo)
+  min_precision: 0.80
+
+# -----------------------------------------------------------------------------
+# Pós-processamento
+# -----------------------------------------------------------------------------
+postprocessing:
+  min_mapping_unit_ha: 0.5        # ~50 pixels a 10 m
+  apply_majority_filter: true
+  majority_kernel: 3
+
+# ---------------- v6 ----------------
+resources:
+  dask_threads: 4                 # limite de threads na composição (01)
+pseudo_labels:
+  source_dir: "D:/Modelo_Caju/v7/data/predictions"   # v7: features 2025 (saída do 04)
+  prob_dir: "D:/Modelo_Caju/v4/data/predictions"     # v7: probabilidade v4 (2023) = pseudo-rótulo
+  municipalities: ["Serra_do_Mel", "Porto_do_Mangue"]
+  pos_threshold: 0.95             # p >= 0.95 -> caju
+  neg_threshold: 0.02             # p <= 0.02 -> não-caju; entre os dois -> ignorado (255)
+  stride: 256                     # sem sobreposição (evita volume excessivo)
+  min_confident_fraction: 0.5     # chip precisa de >= 50% de pixels confiáveis
+  year: 2025                      # v7: ano dos compostos
+ensemble:
+  folds: 5
+  epochs_per_fold: 60
+embeddings:                       # v7: Google Satellite Embedding (AlphaEarth)
+  enabled: true
+  collection: "GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL"
+  year: 2025
+  project: "rnv-geodatin"                  # ID do projeto Google Cloud registrado no Earth Engine
+  dir: data/embeddings
+  n_bands: 64
+  scale: 127                      # int8 = round(valor * 127); -128 = NoData
+  tile_px: 512                    # 512x512x64 int8 = 16 MB por requisição (< 48 MB)
+  workers: 6                      # requisições paralelas (sem tarefas no Earth Engine)
