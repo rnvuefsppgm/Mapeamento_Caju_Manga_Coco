@@ -1,5 +1,6 @@
 # Registro de decisões — Mapa de coco
 
+| 2026-11-22 | Repositório oficial passa a ser rnvuefsppgm/Mapeamento_Caju_Manga_Coco (pasta Coco/, histórico incluído); Mapeamento_coco mantido até conferência | pedido do usuário | Usuário | CLAUDE.md |
 | 2026-11-22 | Mapa único movido para D:/Mapeamento_Culturas (projeto próprio) | pedido do usuário | Claude | D:/Mapeamento_Culturas/STATUS.md |
 | 2026-11-22 | Mapa único caju+manga+coco: códigos 97/98/99 (livres na legenda MB col. 11); disputa por margem normalizada sobre o limiar de cada modelo — PROPOSTA, aguardando o usuário | pedido do usuário | Claude | docs/PLANO_MAPA_UNICO.md |
 | 2026-11-22 | Projeto publicado em github.com/rnvuefsppgm/Mapeamento_coco (scripts, resultados/v1, TUTORIAL.md); 42_vetores_kmz.py criado (KMZ/GPKG) | pedido do usuário | Claude | README.md |

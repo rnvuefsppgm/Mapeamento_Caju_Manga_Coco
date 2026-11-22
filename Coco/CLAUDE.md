@@ -34,3 +34,7 @@ Mapeamento de coqueiro (coco-da-baía) 2025, replicando a estratégia final do c
 - `docs/ESTRATEGIA_ROTULOS.md` como obter rótulos sem dados de campo
 - `docs/PLANO_NOTURNO.md` execução autônoma E5–E7 · `docs/DESEMPENHO.md` ajustes de velocidade e impacto na qualidade · `docs/REFERENCIAS.md` referências bibliográficas/dados (acrescentar novas aqui) · `docs/FONTES.md` acesso/caminhos
 - `config/config.yaml` · `scripts/NN_*.py` (ordem numérica) · `tools/` utilidades
+
+## Repositório (desde 22/11/2026)
+GitHub oficial: `github.com/rnvuefsppgm/Mapeamento_Caju_Manga_Coco`, pasta `Coco/` (cópia local `D:/Mapeamento_Caju_Manga_Coco`).
+O antigo `Mapeamento_coco` será desativado (não apagar sem ordem do usuário); novas versões vão para o repo geral.

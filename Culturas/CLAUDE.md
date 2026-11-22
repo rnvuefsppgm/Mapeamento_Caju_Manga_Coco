@@ -19,3 +19,7 @@ Python `D:/Modelo_Caju/.venv/Scripts/python.exe` (torch CUDA, RTX 3050 4 GB, ras
 ## Mapa
 `scripts/01_pam_censo.py` (PAM 2023–25 + Censo 2017, 3 culturas) → `scripts/02_mapa_unico.py` (GPU, por blocos) →
 `scripts/03_documento.py` (tabela + `docs/CLASSES_MAPA_UNICO.md`). Plano: `docs/PLANO.md`. Decisões detalhadas: `docs/DECISOES_METODOLOGICAS.md` (acrescentar novas aqui e uma linha em `DECISOES.md`).
+
+## Repositório
+GitHub: `github.com/rnvuefsppgm/Mapeamento_Caju_Manga_Coco`, pasta `Culturas/` (cópia local `D:/Mapeamento_Caju_Manga_Coco`).
+Ao atualizar: copiar para a pasta da cultura no repo local, commit e push lá.
