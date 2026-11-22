@@ -1,0 +1,109 @@
+# config.yaml — Mapa de coco 2025 (todos os scripts leem daqui)
+project:
+  name: mapa_coco
+  version: v1
+  ano: 2025
+  random_seed: 42
+  crs_working: "EPSG:32724"     # válido para o NE; revisar se o recorte incluir PA/ES
+
+data_root: "D:/Modelo_Coco"     # dados_externos/ e v1/ ficam aqui
+
+externos:
+  municipios_shp: "D:/arc_arquivos/BR_Municipios_2024/BR_Municipios_2024.shp"
+  bioma_csv: "D:/Modelo_Caju/dados_externos/Bioma_Predominante_por_Municipio_2024.csv"
+  mapbiomas_2025: "D:/Eduarda/raster_new/brazil_coverage-col11_2025.tif"
+  caju_pred_dir: "D:/Modelo_Caju/v10b/predictions/2025"
+  caju_vectors: "D:/Modelo_Caju/v10b/data/vectors"
+  manga_gpkg: "D:/Modelo_Caju/dados_externos/manga/manga_poligonos.gpkg"
+  caju_models: "D:/Modelo_Caju/v10b/models"
+
+pam:
+  tabela: 1613
+  produto: 2727                 # Coco-da-baía
+  variaveis: {area_destinada: 2313, area_colhida: 216, producao_mil_frutos: 214}
+  anos: [2023, 2024, 2025]
+
+censo_agro:                     # Censo Agropecuário 2017, SIDRA 6955
+  tabela: 6955
+  produto: 4945                 # Coco-da-baía (classificação 227)
+  variaveis: {estab_50mais: 9504, area_existente_ha: 10079, area_colhida_ha: 10078,
+              pes_50mais_mil: 10080, pes_menos50_mil: 10082}
+
+# Polos produtores do CE (Neves et al. 2022, REA 20(1), Fig. 1; base Cavalcante 2015).
+# Municípios atribuídos de forma APROXIMADA a partir da figura (não georreferenciada).
+polos_ce:
+  litoral_oeste_principal: [Trairi, Paraipaba, Paracuru, "São Gonçalo do Amarante", Itapipoca, Amontada, Itarema]
+  litoral_norte: [Acaraú, Cruz, "Jijoca de Jericoacoara", Camocim, Barroquinha, "Bela Cruz", Granja, Chaval]
+  litoral_metropolitano: [Caucaia, Fortaleza, Aquiraz, Pindoretama, Cascavel, Eusébio]
+  litoral_leste: [Beberibe, Fortim, Aracati, Icapuí]
+  interior_vale_jaguaribe: ["Limoeiro do Norte", Quixeré, Russas, Jaguaruana, Tabuleiro do Norte]
+  interior_vale_curu: [Pentecoste, "São Luís do Curu", Umirim, Tururu, Uruburetama]
+  interior_vale_acarau: [Marco, Morrinhos, "Santana do Acaraú", Sobral]
+  interior_ibiapaba: [Tianguá, Ubajara, "São Benedito", "Viçosa do Ceará", Ibiapina, Guaraciaba do Norte]
+
+recorte:
+  escopo: "top15_caatinga"      # DECIDIDO 21/11/2026: 15 maiores produtores do NE com Caatinga predominante (lista listas_municipios.top15_caatinga)
+  ufs_nordeste: [MA, PI, CE, RN, PB, PE, AL, SE, BA]
+  top_n: 25
+  criterio: "area_destinada_media"
+  buffer_m: 1000
+
+listas_municipios:
+  # Paraipaba (nº 1 em produção) + 5 seguintes por produção média PAM 2023–25 (mil frutos)
+  amostragem_inicial: [2310258, 2611002, 2300200, 2927101, 1504703, 2313500]
+  # Paraipaba-CE, Petrolândia-PE, Acaraú-CE, Rodelas-BA, Moju-PA, Trairi-CE
+  # 15 maiores produtores do NE com Caatinga predominante (PAM 2023–25) — pedido do usuário 21/11/2026
+  top15_caatinga: [2310258, 2611002, 2300200, 2927101, 2313500, 2611101, 2918407, 2414407,
+                   2306553, 2302206, 2300754, 2302602, 2303501, 2306405, 2907202]
+  # Paraipaba, Petrolândia, Acaraú, Rodelas, Trairi, Petrolina, Juazeiro, Touros, Itarema,
+  # Beberibe, Amontada, Camocim, Cascavel, Itapipoca, Casa Nova
+  sao_francisco: [2611002, 2927101, 2611101, 2918407, 2907202]
+  # Petrolândia, Rodelas, Petrolina, Juazeiro, Casa Nova (coco irrigado; sem amostras do usuário)
+
+amostras_usuario:
+  kml_dir: "D:/Modelo_Coco/dados_externos/amostras_usuario"   # KML da pasta COCO do Google Earth Pro
+  myplaces: "C:/Users/Rodrigo/AppData/LocalLow/Google/GoogleEarth/myplaces.kml"
+  pasta_ge: "COCO"
+
+embeddings:
+  expressao_caju: "D:/Modelo_Caju/v8/expressions"
+  ee_project: "rnv-geodatin"
+  colecao: "GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL"
+  n_bandas: 64
+  resolucao: 10
+  tile_px: 512
+  codificacao: "uint8 = round(x*127)+128; 0 = NoData"
+
+rotulos:
+  classes_compativeis_mb: [48, 21, 15, 41]   # inicial; recalibrar com R-ouro
+  classes_seguras_nao_coco_mb: [3, 4, 5, 23, 24, 25, 30, 31, 33]
+  descals_min_conf: 1
+  xgb_pos: 0.70
+  xgb_neg: 0.10
+  caju_neg_prob: 0.80
+  mancha_min_ha: 1.0
+  teto_pam: 1.2
+  anel_ignorado_px: 2
+  frac_tiles_negativos: 0.4     # 13_xgb_rotulos: fração de tiles SEM positivos usados na amostragem do XGB
+  classes_coco_mb: [48, 21, 41]  # v1b: coco só nestas classes (QC: pastagem 15 = 5/6 erros)
+  erosao_coco_px: 2              # v1b: erosão do coco (bordas/estradas viram ignorado)
+  fotointerp:
+    quadrado_m: 100
+    por_municipio: 60
+    estratos: {S1_descals_e_C: 0.25, S2_descals_so: 0.10, S3_mb48_sem_descals: 0.20, S4_caju_alto: 0.15, S5_similaridade: 0.10, S6_aleatorio: 0.20}
+  qc: {n_pontos: 200, precisao_min_coco: 0.90, precisao_min_nao_coco: 0.95}
+
+chips: {size: 256, stride: 128, min_rotulado: 0.30, ignore_value: 255}
+
+treino:                          # receita v10b
+  cv_folds: 5
+  bloco_km: 10
+  trava_iou: 0.65
+  sementes: [42, 7, 123, 2024, 99]
+  epocas_final: 100
+  aquecimento: 5
+  encoder_lento_epocas: 10
+  init_pesos_caju: true
+  gpu_aug: true
+
+predicao: {tta: 2, pos_proc_min_ha: 1.0}

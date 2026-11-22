@@ -1,0 +1,18 @@
+# dados pesados ficam em data_root (config.yaml), fora do git
+*.npz
+*.npy
+*.parquet
+*.pt
+*.vrt
+__pycache__/
+*.pyc
+logs/
+# arquivos locais do assistente
+.claude/
+# rasters e vetores: só os resultados versionados
+*.tif
+*.gpkg
+*.kmz
+!resultados/**/*.tif
+!resultados/**/*.gpkg
+!resultados/**/*.kmz
