@@ -2,6 +2,8 @@
 
 Mapeamento de pomares de caju (*Anacardium occidentale*) na Caatinga com **deep learning (U-Net)** e **embeddings de satélite AlphaEarth** (Google Satellite Embedding, 64 dimensões, 10 m).
 
+> **Onde fica:** esta é a pasta `Caju/` do repositório geral [Mapeamento_Caju_Manga_Coco](https://github.com/rnvuefsppgm/Mapeamento_Caju_Manga_Coco) (caju, manga, coco e mapa único das culturas). Novas versões do caju entram aqui. O repositório antigo [Mapeamento_Caju](https://github.com/rnvuefsppgm/Mapeamento_Caju) guarda o histórico até o commit 36ce89f e não recebe mais atualizações.
+
 O produto atual é o **mapa de caju de 2025 dos 25 maiores municípios produtores da Caatinga**. Esses 25 municípios somam 67,6% da área colhida e 75,8% da produção de castanha de caju da Caatinga nordestina (PAM/IBGE 2025).
 
 | | |
@@ -55,10 +57,10 @@ Embeddings AlphaEarth 2025 (64 bandas, 10 m)
 
 ## 2. Estrutura do repositório
 
-As pastas `vN` são **etapas encadeadas**: cada versão usa saídas da anterior por caminho relativo (`../vN/...`). Mantenha a estrutura.
+As pastas `vN` são **etapas encadeadas**: cada versão usa saídas da anterior por caminho relativo (`../vN/...`). Mantenha a estrutura e rode os comandos de dentro de `Caju/`.
 
 ```
-Mapeamento_Caju/
+Caju/                        (pasta do repositório Mapeamento_Caju_Manga_Coco)
 ├── README.md                ← este tutorial
 ├── requirements.txt
 ├── dados_externos/          PAM/IBGE (castanha de caju 2023–2025), ranking da Caatinga, biomas, limites dos 25 municípios
